@@ -27,3 +27,12 @@ export const walletPay = async (amount: number) => {
     })
     return is_succesful
 }
+
+const isOnboardingStore = await store.get<boolean>('is_onboarding');
+export const isOnboarding = writable<boolean>(isOnboardingStore != undefined ? isOnboardingStore : true);
+
+export const setOnboarding = async (onboarded: boolean) => {
+    await store.set('is_onboarding', onboarded);
+    isOnboarding.set(onboarded);
+}
+(window as any).setOnboarded = setOnboarding;
