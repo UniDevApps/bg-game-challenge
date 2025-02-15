@@ -1,4 +1,6 @@
 <script lang="js">
+    import Header from "./Header.svelte";
+    import Menu from "./Menu.svelte";
     import { wallet, walletCredit, walletPay } from "./store";
 
     const add = () => {
@@ -10,9 +12,14 @@
     }
 </script>
 
-<main class="container">
-  <h1>Welcome to Tauri + Svelte</h1>
-  <p>{$wallet}</p>
-  <button onclick={add}>Add</button>
-  <button onclick={pay}>Pay</button>
-</main>
+<div class="container">
+  <Header />
+  <Menu />
+</div>
+
+<style>
+  .container {
+    height: 100%;
+    width: 100%;
+  }
+</style>

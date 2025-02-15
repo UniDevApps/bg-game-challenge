@@ -35,7 +35,10 @@
 <style>
     :global(body) {
         margin:0;
-        padding:0
+        padding:0;
+    }
+    :global(*) {
+        box-sizing: border-box;
     }
 
     @font-face {
@@ -58,6 +61,7 @@
         align-items: center;
         background: none;
         border: none;
+        width: min-content;
     }
     :global(.grn-btn-img) {
         width: 250px;
@@ -69,6 +73,8 @@
 
     :global(p, h1, h2, h3) {
         line-height: 120%;
+        padding: 0;
+        margin: 0;
     }
 
     :global(.one-btn-block) {
