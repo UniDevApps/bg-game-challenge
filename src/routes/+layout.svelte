@@ -2,6 +2,7 @@
     import { writable } from "svelte/store";
     import { isOnboarding } from "./store";
     import { onMount } from "svelte";
+    import Loading from "./Loading.svelte";
 
     let isLoading = writable(true);
     
@@ -20,9 +21,9 @@
     })
 </script>
 
-<div>
+<main>
     {#if $isLoading}
-        <div>Loading</div>
+        <Loading />
     {:else if $isOnboarding}
         <div>
             Onboarding
@@ -30,4 +31,23 @@
     {:else}
         <slot />
     {/if}
-</div>
+</main>
+
+<style>
+    :global(body) {
+        margin:0;
+        padding:0
+    }
+
+    @font-face {
+        font-family: Changa;
+        src: url("/fonts/Changa-VariableFont_wght.ttf");
+    }
+
+    main {
+        color: white;
+        font-family: "Changa", sans-serif;
+        width: 100vw;
+        height: 100vh;
+    }
+</style>
