@@ -1,5 +1,4 @@
 <script lang="js">
-    import Header from "./Header.svelte";
     import Menu from "./Menu.svelte";
     import { wallet, walletCredit, walletPay } from "./store";
 
@@ -13,7 +12,6 @@
 </script>
 
 <div class="container">
-  <Header />
   <Menu />
 </div>
 

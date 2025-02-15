@@ -1,15 +1,20 @@
+<script>
+
+    import { goto } from "$app/navigation";
+
+</script>
 <div class="menu">
-    <button class="grn-btn item-1">
+    <button class="grn-btn item-1" onclick={() => goto("superball")}>
         <img class="grn-btn-img" src="/items/green_button.png" alt="btn">
         <h2 class="grn-btn-text">Super Ball</h2>
     </button>
 
-    <button class="grn-btn item-2">
+    <button class="grn-btn item-2" onclick={() => goto("colordash")}>
         <img class="grn-btn-img" src="/items/green_button.png" alt="btn">
         <h2 class="grn-btn-text">Color Dash</h2>
     </button>
 
-    <button class="grn-btn">
+    <button class="grn-btn" onclick={() => goto("chaseplane")}>
         <img class="grn-btn-img" src="/items/green_button.png" alt="btn">
         <h2 class="grn-btn-text">Chase the Plane</h2>
     </button>
@@ -17,7 +22,7 @@
 
 <style>
     .menu {
-        background: url("/backgrounds/loading.png") no-repeat center center;
+        background: url("/backgrounds/menu.png") no-repeat center center;
         background-size: cover;
         height: 100%;
         max-width: 100%;

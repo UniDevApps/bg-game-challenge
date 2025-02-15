@@ -1,15 +1,27 @@
-<script>
+<script lang="ts">
+    import { afterNavigate } from "$app/navigation";
+    import { writable } from "svelte/store";
     import { wallet } from "./store";
 
-    $: currentPath = window.location.pathname
+    const getBackPath = (id: string) => {
+        if (id == "/superball" || id == "/colordash" || id == "/chaseplane") {
+            return "/";
+        }
+        return ""
+    }
+
+    const back_path = writable(getBackPath(window.location.pathname))
+    afterNavigate(() => {
+        $back_path = getBackPath(window.location.pathname)
+    })
 </script>
 
 <header>
-    <button class="back-btn">
-        {#if currentPath != "/"}
+    <a class="back-btn" href={$back_path}>
+        {#if $back_path != ""}
             <img class="back-btn-img" src="/items/back_button.png" alt="">
         {/if}
-    </button>
+    </a>
     <div class="wallet">
         <h2>{$wallet}</h2>
         <img class="wallet-img" src="/items/money.svg" alt="Money">

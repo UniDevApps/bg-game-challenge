@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import Loading from "./Loading.svelte";
     import Onboarding from "./Onboarding.svelte";
+    import Header from "./Header.svelte";
 
     let isLoading = writable(true);
     
@@ -28,6 +29,7 @@
     {:else if $isOnboarding}
         <Onboarding />
     {:else}
+        <Header />
         <slot />
     {/if}
 </main>
