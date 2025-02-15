@@ -19,7 +19,7 @@
     <div class="rest-content">
         <h1 class="grn-text">Super Ball!</h1>
         <h2>Overcome sports obstacles, collect coins, and set new records!</h2>
-        <p>Control the ball, dodge obstacles, and prove you're the champion!</p>
+        <p class="game-desc">Control the ball, dodge obstacles, and prove you're the champion!</p>
     </div>
     <div class="bottom">
         <div class="balls">
@@ -84,6 +84,6 @@
     }
     
     .slot img {
-        width: 70px;
+        height: 70px;
     }
 </style>

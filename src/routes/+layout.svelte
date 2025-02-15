@@ -101,4 +101,12 @@
     :global(.grn-text) {
         color: #50EC80;
     }
+
+    :global(.red-text) {
+        color: #FF0000;
+    }
+
+    :global(.game-desc) {
+        font-size: 22px;
+    }
 </style>
