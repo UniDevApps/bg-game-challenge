@@ -3,6 +3,7 @@
     import { isOnboarding } from "./store";
     import { onMount } from "svelte";
     import Loading from "./Loading.svelte";
+    import Onboarding from "./Onboarding.svelte";
 
     let isLoading = writable(true);
     
@@ -25,9 +26,7 @@
     {#if $isLoading}
         <Loading />
     {:else if $isOnboarding}
-        <div>
-            Onboarding
-        </div>
+        <Onboarding />
     {:else}
         <slot />
     {/if}
@@ -46,8 +45,52 @@
 
     main {
         color: white;
+        background-color: black;
         font-family: "Changa", sans-serif;
         width: 100vw;
         height: 100vh;
+        text-align: center;
+    }
+
+    :global(.grn-btn) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border: none;
+    }
+    :global(.grn-btn-img) {
+        width: 250px;
+    }
+    :global(.grn-btn-text) {
+        position: absolute;
+        color: black !important;
+    }
+
+    :global(p, h1, h2, h3) {
+        line-height: 120%;
+    }
+
+    :global(.one-btn-block) {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 20px;
+        padding-bottom: 100px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    :global(.rest-content) {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;        
+    }
+
+    :global(.grn-text) {
+        color: #50EC80;
     }
 </style>
