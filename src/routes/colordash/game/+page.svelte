@@ -1,16 +1,10 @@
-<script>
+<script lang="ts">
     import { afterNavigate, goto } from "$app/navigation";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { writable } from "svelte/store";
 
-    /**
-     * @type {HTMLCanvasElement}
-     */
-    let canvas
-    /**
-     * @type {CanvasRenderingContext2D | null}
-     */
-    let context
+    let canvas: HTMLCanvasElement
+    let context: CanvasRenderingContext2D | null
 
     let isRunning = writable(location.search != "?gameover")
 
@@ -20,6 +14,37 @@
         image: new Image()
     };
     background.image.src = '/backgrounds/colordash.png'; 
+
+    const ball = {
+        dx: () => canvas.width / 2 - ball.radius / 2,
+        dy: () => canvas.height - ball.radius - 150,
+        speed: 5,
+        radius: 100,
+        image: new Image()
+    };
+    ball.image.src = `/sprites/colordash/ball_${Math.floor(Math.random() * 3) + 1}.png`;
+
+    interface Wall {
+        x: number,
+        y: number,
+        image: HTMLImageElement
+    }
+
+    interface Walls {
+        speed: number;
+        radius: number;
+        width: () => number;
+        height: number;
+        items: Wall[];
+    }
+
+    const walls: Walls = {
+        speed: 3,
+        radius: 50,
+        width: () => canvas.width,
+        height: 50,
+        items: [],
+    }
     
     function drawBackground() {
         // @ts-ignore
@@ -33,36 +58,86 @@
         }
     }
 
-    function update() {
-        // @ts-ignore
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        drawBackground();
-        // drawBall();
-        // drawMoney();
-
-        // Move ball
-        // if (ball.dx !== 0 || ball.dy !== 0) {
-        //     ball.x += ball.dx;
-        //     ball.y += ball.dy;
-        // }
-
-        // // Keep ball within canvas bounds
-        // if (ball.x - ballRadius < 0) ball.x = ballRadius;
-        // if (ball.x + ballRadius > canvas.width) ball.x = canvas.width - ballRadius;
-        // if (ball.y - ballRadius < 0) ball.y = ballRadius;
-        // if (ball.y + ballRadius > canvas.height) ball.y = canvas.height - ballRadius;
-        
-        requestAnimationFrame(update);
+    function drawBall() {
+        if (context != null) {
+            context.drawImage(ball.image, 
+            ball.dx(),
+            ball.dy(),
+            ball.radius, ball.radius);
+        }
     }
 
-    onMount(() => {
-        context = canvas.getContext('2d')
+    function drawWalls() {
+        walls.items.forEach((item, index) => {
+            if (context != null) {
+                context.drawImage(item.image, item.x, item.y, walls.width(), walls.height);
+                item.y += walls.speed;
 
-        // canvas.width = window.innerWidth;
-        // canvas.height = window.innerHeight;
+                // Remove money if it goes off screen
+                if (item.y > canvas.height) {
+                    walls.items.splice(index, 1);
+                }
+            }
+        })
+    }
+
+    const handleResize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    };
+
+    function update() {
+        if (canvas != null) {
+            // @ts-ignore
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawBall();
+            drawWalls()
+            // drawMoney();
+    
+            // Move ball
+            // if (ball.dx !== 0 || ball.dy !== 0) {
+            //     ball.x += ball.dx;
+            //     ball.y += ball.dy;
+            // }
+    
+            // // Keep ball within canvas bounds
+            // if (ball.x - ballRadius < 0) ball.x = ballRadius;
+            // if (ball.x + ballRadius > canvas.width) ball.x = canvas.width - ballRadius;
+            // if (ball.y - ballRadius < 0) ball.y = ballRadius;
+            // if (ball.y + ballRadius > canvas.height) ball.y = canvas.height - ballRadius;
+            
+            requestAnimationFrame(update);
+        }
+    }
+
+    function createWall() {
+        const moneyImage = new Image();
+        moneyImage.src = `/sprites/colordash/wall_${Math.floor(Math.random() * 3) + 1}.png`; // Replace with your money image
+        walls.items.push({
+            x: 0,
+            y: 0-walls.height,
+            image: moneyImage
+        });
+    }
+
+    let interval: number | undefined;
+
+    onMount(() => {
+        window.addEventListener('resize', handleResize);
+
+        context = canvas.getContext('2d')
+        handleResize()
+
+        interval = setInterval(createWall, 3000);
 
         update()
     })
+
+    onDestroy(() => {
+        window.removeEventListener('resize', handleResize);
+        clearInterval(interval)
+    });
 
     afterNavigate(() => {
         if (location.search == "?gameover") {
