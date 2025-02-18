@@ -1,4 +1,6 @@
 <script>
+    import { goto } from "$app/navigation";
+
     const slots = [
         {
             url: "/sprites/chaseplane/plane_1.png"
@@ -13,6 +15,10 @@
             url: "/sprites/chaseplane/plane_4.png"
         },
     ]
+
+    const handleButton = () => {
+        goto("/colordash/game")
+    }
 </script>
 
 <div class="one-btn-block superball">
@@ -23,7 +29,7 @@
     </div>
     <div class="bottom">
         <img class="ops" src="/items/chaseplane_ops.png" alt="">
-        <button class="grn-btn">
+        <button class="grn-btn" onclick={handleButton}>
             <img class="grn-btn-img" src="/items/green_button.png" alt="btn">
             <h2 class="grn-btn-text">Start now</h2>
         </button>

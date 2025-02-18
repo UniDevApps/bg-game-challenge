@@ -6,6 +6,12 @@
     const getBackPath = (id: string) => {
         if (id == "/superball" || id == "/colordash" || id == "/chaseplane") {
             return "/";
+        } else if (id == "/superball/game") {
+            return "/superball/game?gameover"
+        } else if (id == "/colordash/game") {
+            return "/colordash/game?gameover"
+        } else if (id == "/chaseplane/game") {
+            return "/chaseplane/game?gameover"
         }
         return ""
     }
