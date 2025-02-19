@@ -198,7 +198,7 @@
             wallImage.src = wallTempletes[id].src
             walls.items.push({
                 x: getRandomArbitrary(0, window.innerWidth-wallTempletes[id].width),
-                y: 0,
+                y: 0-wallTempletes[id].height,
                 image: wallImage,
                 width: wallTempletes[id].width,
                 height: wallTempletes[id].height,
@@ -218,6 +218,7 @@
         $isRunning = true
         $earned = 0
         walls.items = []
+        money.items = []
         goto("/superball/game")
     }
 
@@ -225,19 +226,30 @@
         goto("/")
     }
 
+    const moveBall = (event: TouchEvent) => {
+        if ($isRunning) {
+            ball.dx = Math.max(
+                Math.min(event.touches[0].clientX-ball.width/2, canvas.width-ball.width),
+                0
+            )
+        }
+    }
+
     onMount(() => {
         window.addEventListener('resize', handleResize);
+        window.addEventListener("touchmove", moveBall);
 
         context = canvas.getContext('2d')
         handleResize()
 
-        interval = setInterval(createEntities, 1000);
+        interval = setInterval(createEntities, 3000);
 
         update()
     })
 
     onDestroy(() => {
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener("touchmove", moveBall);
         clearInterval(interval)
     });
 
