@@ -30,7 +30,7 @@
                 plane.style.display = "block";
                 setTimeout(() => {
                     plane.style.display = "none";
-                }, 500);
+                }, 400);
             }
         }, 5000);
     })
@@ -63,7 +63,6 @@
     }
 
     const handleButton = () => {
-        plane.style.display = "none";
         walletCredit(10)
         $earned += 10
     }
@@ -126,6 +125,7 @@
         background: none;
         position: absolute;
         display: none;
+        user-select: none;
     }
 
     #plane img {
