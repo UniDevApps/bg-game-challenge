@@ -43,31 +43,76 @@ type Ball = {
     price: number
 }
 const ballsStorage = await store.get<Ball[]>("balls");
-export const selectedSlot = writable<number>(0)
+export const selectedBall = writable<number>(0)
 export const balls = writable<Ball[]>(ballsStorage != undefined ? ballsStorage : [
     {
-        src: "/sprites/superball/ball_1.png",
+        src: "/sprites/chaseplane/plane_1.png",
         buyed: true,
         price: 0
     },
     {
-        src: "/sprites/superball/ball_2.png",
+        src: "/sprites/chaseplane/plane_2.png",
         buyed: false,
         price: 100
     },
     {
-        src: "/sprites/superball/ball_3.png",
+        src: "/sprites/chaseplane/plane_3.png",
         buyed: false,
         price: 300
     },
     {
-        src: "/sprites/superball/ball_1.png",
+        src: "/sprites/chaseplane/plane_4.png",
         buyed: false,
         price: 500
     },
 ]);
 
 export const buyBall = (index: number) => {
+    balls.update((balls) => {
+        wallet.update((value) => {
+            if (value >= balls[index].price) {
+                value -= balls[index].price;
+                store.set("wallet", value);
+                balls[index].buyed = true;
+                store.set("balls", balls);
+            }
+            return value
+        })
+        return balls
+    })
+}
+
+type Plane = {
+    src: string,
+    buyed: boolean,
+    price: number
+}
+const planeStorage = await store.get<Plane[]>("plane");
+export const selectedPlane = writable<number>(0)
+export const planes = writable<Plane[]>(planeStorage != undefined ? planeStorage : [
+    {
+        src: "/sprites/chaseplane/plane_1.png",
+        buyed: true,
+        price: 0
+    },
+    {
+        src: "/sprites/chaseplane/plane_2.png",
+        buyed: false,
+        price: 100
+    },
+    {
+        src: "/sprites/chaseplane/plane_3.png",
+        buyed: false,
+        price: 300
+    },
+    {
+        src: "/sprites/chaseplane/plane_1.png",
+        buyed: false,
+        price: 500
+    },
+]);
+
+export const buyPlane = (index: number) => {
     balls.update((balls) => {
         wallet.update((value) => {
             if (value >= balls[index].price) {

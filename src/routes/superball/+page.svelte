@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { balls, buyBall, selectedSlot } from "../store";
+    import { balls, buyBall, selectedBall } from "../store";
 
-    const selectSlot = (index: number) => {
+    const selectBall = (index: number) => {
         if ($balls[index].buyed == true) {
-            $selectedSlot = index
+            $selectedBall = index
         } else {
             buyBall(index)
         }
@@ -22,8 +22,8 @@
             <div class="slots">
                 {#each $balls as ball, i}
                     <button
-                    class={`slot ${ball.buyed ? "" : "paywall"} ${$selectedSlot == i ? "selected" : ""}`}
-                    onclick={() => selectSlot(i)}>
+                    class={`slot ${ball.buyed ? "" : "paywall"} ${$selectedBall == i ? "selected" : ""}`}
+                    onclick={() => selectBall(i)}>
                         <img src={ball.src} alt="ball">
                         {#if ball.buyed == false}
                             <div class="wall">

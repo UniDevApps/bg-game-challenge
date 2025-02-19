@@ -1,21 +1,16 @@
-<script>
-    const slots = [
-        {
-            url: "/sprites/chaseplane/plane_1.png"
-        },
-        {
-            url: "/sprites/chaseplane/plane_2.png"
-        },
-        {
-            url: "/sprites/chaseplane/plane_3.png"
-        },
-        {
-            url: "/sprites/chaseplane/plane_4.png"
-        },
-    ]
+<script lang="ts">
+    import { buyPlane, planes, selectedPlane } from "../store";
+
+    const selectBall = (index: number) => {
+        if ($planes[index].buyed == true) {
+            $selectedPlane = index
+        } else {
+            buyPlane(index)
+        }
+    }
 </script>
 
-<div class="one-btn-block superball">
+<div class="one-btn-block chaseplane">
     <div class="rest-content">
         <h1 class="grn-text">Chase the Plane!</h1>
         <h2>Catch the plane as it soars across the screen!</h2>
@@ -26,11 +21,22 @@
         <div class="planes">
             <h2>Choose your plane:</h2>
             <div class="slots">
-                {#each slots as slot}
-                    <div class="slot">
-                        <img src={slot.url} alt="ball">
-                    </div>
-                {/each}
+                {#each $planes as plane, i}
+                <button
+                class={`slot ${plane.buyed ? "" : "paywall"} ${$selectedPlane == i ? "selected" : ""}`}
+                onclick={() => selectBall(i)}>
+                    <img src={plane.src} alt="ball">
+                    {#if plane.buyed == false}
+                        <div class="wall">
+                            <img src="/items/lock.png" alt="">
+                            <div class="price-box">
+                                <p>{plane.price}</p>
+                                <img src="/items/money.svg" alt="">
+                            </div>
+                        </div>
+                    {/if}
+                </button>
+            {/each}
             </div>
         </div>
         <button class="grn-btn">
@@ -41,7 +47,7 @@
 </div>
 
 <style>
-    .superball {
+    .chaseplane {
         background: url("/backgrounds/chaseplane.png") no-repeat center center;
         background-size: cover;
     }
@@ -82,9 +88,56 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        color: white;
     }
     
     .slot img {
         height: 70px;
+    }
+
+    .slot.selected {
+        border: 3px solid #23EE88;
+    }
+    
+    .slot img {
+        height: 70px;
+    }
+
+    .paywall {
+        position: relative;
+    }
+
+    .wall {
+        position: absolute;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 5px;
+        font-family: "Changa", sans-serif;
+    }
+
+    .wall img {
+        width: 40px;
+        height: 50px;
+    }
+
+    .price-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .price-box img {
+        width: 20px;
+        height: 15px;
     }
 </style>
