@@ -1,18 +1,11 @@
-<script>
-    const slots = [
-        {
-            url: "/sprites/superball/ball_1.png"
-        },
-        {
-            url: "/sprites/superball/ball_2.png"
-        },
-        {
-            url: "/sprites/superball/ball_3.png"
-        },
-        {
-            url: "/sprites/superball/ball_4.png"
-        },
-    ]
+<script lang="ts">
+    import { balls, walletPay } from "../store";
+
+    const buyBall = async (index: number) => {
+        if (await walletPay($balls[index].price)) {
+            $balls[index].buyed = true
+        }
+    }
 </script>
 
 <div class="one-btn-block superball">
@@ -25,9 +18,9 @@
         <div class="balls">
             <h2>Choose your ball:</h2>
             <div class="slots">
-                {#each slots as slot}
+                {#each $balls as ball}
                     <div class="slot">
-                        <img src={slot.url} alt="ball">
+                        <img src={ball.src} alt="ball">
                     </div>
                 {/each}
             </div>

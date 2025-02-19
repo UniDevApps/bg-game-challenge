@@ -114,19 +114,6 @@
             drawBackground();
             drawBall();
             drawWalls()
-            // drawMoney();
-    
-            // Move ball
-            // if (ball.dx !== 0 || ball.dy !== 0) {
-            //     ball.x += ball.dx;
-            //     ball.y += ball.dy;
-            // }
-    
-            // // Keep ball within canvas bounds
-            // if (ball.x - ballRadius < 0) ball.x = ballRadius;
-            // if (ball.x + ballRadius > canvas.width) ball.x = canvas.width - ballRadius;
-            // if (ball.y - ballRadius < 0) ball.y = ballRadius;
-            // if (ball.y + ballRadius > canvas.height) ball.y = canvas.height - ballRadius;
             
             requestAnimationFrame(update);
         }

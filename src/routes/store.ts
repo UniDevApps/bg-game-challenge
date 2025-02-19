@@ -36,3 +36,32 @@ export const setOnboarding = async (onboarded: boolean) => {
     isOnboarding.set(onboarded);
 }
 (window as any).setOnboarded = setOnboarding;
+
+type Ball = {
+    src: string,
+    buyed: boolean,
+    price: number
+}
+const ballsStorage = await store.get<Ball[]>("balls");
+export const balls = writable<Ball[]>(ballsStorage != undefined ? ballsStorage : [
+    {
+        src: "/sprites/superball/ball_1.png",
+        buyed: true,
+        price: 0
+    },
+    {
+        src: "/sprites/superball/ball_2.png",
+        buyed: false,
+        price: 100
+    },
+    {
+        src: "/sprites/superball/ball_3.png",
+        buyed: false,
+        price: 300
+    },
+    {
+        src: "/sprites/superball/ball_1.png",
+        buyed: false,
+        price: 500
+    },
+]);
