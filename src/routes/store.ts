@@ -113,16 +113,16 @@ export const planes = writable<Plane[]>(planeStorage != undefined ? planeStorage
 ]);
 
 export const buyPlane = (index: number) => {
-    balls.update((balls) => {
+    planes.update((planes) => {
         wallet.update((value) => {
-            if (value >= balls[index].price) {
-                value -= balls[index].price;
+            if (value >= planes[index].price) {
+                value -= planes[index].price;
                 store.set("wallet", value);
-                balls[index].buyed = true;
-                store.set("balls", balls);
+                planes[index].buyed = true;
+                store.set("plane", planes);
             }
             return value
         })
-        return balls
+        return planes
     })
 }
