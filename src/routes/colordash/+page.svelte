@@ -16,9 +16,7 @@
         },
     ]
 
-    const handleButton = () => {
-        goto("/colordash/game")
-    }
+    const handleButton = () => goto("/colordash/game")
 </script>
 
 <div class="one-btn-block superball">

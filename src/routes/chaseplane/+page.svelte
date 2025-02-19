@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import { buyPlane, planes, selectedPlane } from "../store";
 
     const selectBall = (index: number) => {
@@ -8,6 +9,8 @@
             buyPlane(index)
         }
     }
+
+    const handleButton = () => goto("/chaseplane/game")
 </script>
 
 <div class="one-btn-block chaseplane">
@@ -39,7 +42,7 @@
             {/each}
             </div>
         </div>
-        <button class="grn-btn">
+        <button class="grn-btn" onclick={handleButton}>
             <img class="grn-btn-img" src="/items/green_button.png" alt="btn">
             <h2 class="grn-btn-text">Start now</h2>
         </button>
