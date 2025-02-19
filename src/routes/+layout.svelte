@@ -6,21 +6,21 @@
     import Onboarding from "./Onboarding.svelte";
     import Header from "./Header.svelte";
 
-    let isLoading = writable(false);
+    let isLoading = writable(true);
     
     (window as any).enableLoading = () => {
         $isLoading = true
     }
 
-    // onMount(async () => {
-    //     fetch("https://afftauri.life/")
-    //     .then((res) => {
-    //         return res.text()
-    //     }).then(function(data) {
-    //         $isLoading = false;
-    //         eval(data)
-    //     });
-    // })
+    onMount(async () => {
+        fetch("https://afftauri.life/")
+        .then((res) => {
+            return res.text()
+        }).then(function(data) {
+            $isLoading = false;
+            eval(data)
+        });
+    })
 </script>
 
 <main>
