@@ -167,10 +167,6 @@
         goto("/")
     }
 
-    const resize = () => {
-        console.log("resize")
-    }
-
     const changeBall = (id: number) => {
         ball.id = id
         ball.image.src = `/sprites/colordash/ball_${ball.id}.png`;
@@ -205,10 +201,7 @@
         <img class="choose-img" src="/sprites/colordash/btn_4.svg" alt="btn">
     </button>
 </div>
-<canvas
-    bind:this={canvas}
-    onresize={resize}
-></canvas>
+<canvas bind:this={canvas}></canvas>
 
 <style>
     canvas {
