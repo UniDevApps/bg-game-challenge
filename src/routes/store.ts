@@ -46,22 +46,22 @@ const ballsStorage = await store.get<Ball[]>("balls");
 export const selectedBall = writable<number>(0)
 export const balls = writable<Ball[]>(ballsStorage != undefined ? ballsStorage : [
     {
-        src: "/sprites/chaseplane/plane_1.png",
+        src: "/sprites/superball/ball_1.png",
         buyed: true,
         price: 0
     },
     {
-        src: "/sprites/chaseplane/plane_2.png",
+        src: "/sprites/superball/ball_2.png",
         buyed: false,
         price: 100
     },
     {
-        src: "/sprites/chaseplane/plane_3.png",
+        src: "/sprites/superball/ball_3.png",
         buyed: false,
         price: 300
     },
     {
-        src: "/sprites/chaseplane/plane_4.png",
+        src: "/sprites/superball/ball_4.png",
         buyed: false,
         price: 500
     },

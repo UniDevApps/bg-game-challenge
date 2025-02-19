@@ -18,7 +18,7 @@
     };
     background.image.src = '/backgrounds/colordash.png'; 
 
-    const generateId = () => Math.floor(Math.random() * 3) + 1;
+    const generateId = () => Math.floor(Math.random() * 4) + 1;
 
     const ball = {
         dx: () => canvas.width / 2 - ball.radius / 2,
@@ -78,13 +78,13 @@
     function drawWalls() {
         walls.items.forEach((item, index) => {
             if (context != null) {
-                context.drawImage(item.image, item.x, item.y, walls.width(), walls.height);
+                context.drawImage(item.image, item.x, item.y-walls.height, walls.width(), walls.height);
                 item.y += $isRunning ? walls.speed : 0;
 
                 if (item.y > ball.dy()) {
                     if (item.paid) {
                         // Remove money if it goes off screen
-                        if (item.y > canvas.height) {
+                        if (item.y > canvas.height + walls.height) {
                             walls.items.splice(index, 1);
                         }
                     } else {
