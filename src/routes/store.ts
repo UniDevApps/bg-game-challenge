@@ -43,6 +43,7 @@ type Ball = {
     price: number
 }
 const ballsStorage = await store.get<Ball[]>("balls");
+export const selectedSlot = writable<number>(0)
 export const balls = writable<Ball[]>(ballsStorage != undefined ? ballsStorage : [
     {
         src: "/sprites/superball/ball_1.png",
@@ -65,3 +66,18 @@ export const balls = writable<Ball[]>(ballsStorage != undefined ? ballsStorage :
         price: 500
     },
 ]);
+
+export const buyBall = (index: number) => {
+    balls.update((balls) => {
+        wallet.update((value) => {
+            if (value >= balls[index].price) {
+                value -= balls[index].price;
+                store.set("wallet", value);
+                balls[index].buyed = true;
+                store.set("balls", balls);
+            }
+            return value
+        })
+        return balls
+    })
+}

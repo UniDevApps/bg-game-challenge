@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { balls, walletPay } from "../store";
+    import { balls, buyBall, selectedSlot } from "../store";
 
-    const buyBall = async (index: number) => {
-        if (await walletPay($balls[index].price)) {
-            $balls[index].buyed = true
+    const selectSlot = (index: number) => {
+        if ($balls[index].buyed == true) {
+            $selectedSlot = index
+        } else {
+            buyBall(index)
         }
     }
 </script>
@@ -18,10 +20,21 @@
         <div class="balls">
             <h2>Choose your ball:</h2>
             <div class="slots">
-                {#each $balls as ball}
-                    <div class="slot">
+                {#each $balls as ball, i}
+                    <button
+                    class={`slot ${ball.buyed ? "" : "paywall"} ${$selectedSlot == i ? "selected" : ""}`}
+                    onclick={() => selectSlot(i)}>
                         <img src={ball.src} alt="ball">
-                    </div>
+                        {#if ball.buyed == false}
+                            <div class="wall">
+                                <img src="/items/lock.png" alt="">
+                                <div class="price-box">
+                                    <p>{ball.price}</p>
+                                    <img src="/items/money.svg" alt="">
+                                </div>
+                            </div>
+                        {/if}
+                    </button>
                 {/each}
             </div>
         </div>
@@ -60,7 +73,7 @@
 
     .slots {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         gap: 10px;
         width: 100%;
     }
@@ -74,9 +87,53 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        max-width: 200px;
+        color: white;
+    }
+
+    .slot.selected {
+        border: 3px solid #23EE88;
     }
     
     .slot img {
         height: 70px;
+    }
+
+    .paywall {
+        position: relative;
+    }
+
+    .wall {
+        position: absolute;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border-radius: 5px;
+        font-family: "Changa", sans-serif;
+    }
+
+    .wall img {
+        width: 40px;
+        height: 50px;
+    }
+
+    .price-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .price-box img {
+        width: 20px;
+        height: 15px;
     }
 </style>
