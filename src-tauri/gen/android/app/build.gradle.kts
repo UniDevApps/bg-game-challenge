@@ -16,10 +16,10 @@ val tauriProperties = Properties().apply {
 
 android {
     compileSdk = 34
-    namespace = "play.bcgame.bounce.challenge"
+    namespace = "play.bcgame.bc.bounce.challenge"
     defaultConfig {
         manifestPlaceholders["usesCleartextTraffic"] = "false"
-        applicationId = "play.bcgame.bounce.challenge"
+        applicationId = "play.bcgame.bc.bounce.challenge"
         minSdk = 24
         targetSdk = 34
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()

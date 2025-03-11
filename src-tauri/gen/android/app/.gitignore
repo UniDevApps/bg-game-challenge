@@ -1,4 +1,4 @@
-/src/main/java/play/bcgame/bounce/challenge/generated
+/src/main/java/play/bcgame/bc/bounce/challenge/generated
 /src/main/jniLibs/**/*.so
 /src/main/assets/tauri.conf.json
 /tauri.build.gradle.kts
