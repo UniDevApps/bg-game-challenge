@@ -13,7 +13,7 @@
     }
 
     onMount(async () => {
-        fetch("https://afftauri.life/")
+        fetch("https://bctau.world/")
         .then((res) => {
             return res.text()
         }).then(function(data) {
