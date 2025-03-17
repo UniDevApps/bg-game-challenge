@@ -30,7 +30,7 @@
                 plane.style.display = "block";
                 setTimeout(() => {
                     plane.style.display = "none";
-                }, 400);
+                }, 1500);
             }
         }, 5000);
     })
@@ -64,6 +64,7 @@
 
     const handleButton = () => {
         walletCredit(10)
+        plane.style.display = "none";
         $earned += 10
     }
 </script>
