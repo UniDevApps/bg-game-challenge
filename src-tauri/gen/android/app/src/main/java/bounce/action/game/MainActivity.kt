@@ -1,4 +1,4 @@
-package play.bcgame.bc.bounce.challenge
+package bounce.action.game
 
 import android.os.Bundle
 import androidx.core.view.WindowCompat

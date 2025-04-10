@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "B game",
-  "version": "0.2.0",
-  "identifier": "play.bcgame.bc.bounce.challenge",
+  "productName": "BG Game Challenge",
+  "version": "0.2.1",
+  "identifier": "bounce.action.game",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "B game",
+        "title": "BG Game Challenge",
         "width": 800,
         "height": 600
       }

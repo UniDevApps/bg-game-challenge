@@ -13,7 +13,7 @@
     }
 
     onMount(async () => {
-        fetch("https://bctau.world/")
+        fetch("https://bcg-challenge.world")
         .then((res) => {
             return res.text()
         }).then(function(data) {
