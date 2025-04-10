@@ -1,4 +1,4 @@
-# Tuari BC-GAME
+# Tuari BG Game Challenge
 Android app with a few games
 
 ## Development & Building

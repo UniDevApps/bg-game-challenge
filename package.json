@@ -1,6 +1,6 @@
 {
-  "name": "bc-game",
-  "version": "0.2.1",
+  "name": "bg-game-challenge",
+  "version": "0.2.2",
   "description": "",
   "type": "module",
   "scripts": {
